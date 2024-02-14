@@ -17,42 +17,41 @@ namespace лабораторная_работа_1_разработка_прог�
         public Form1()
         {
             InitializeComponent();
-
-
         }
 
-        private BigInteger калькулятор(int n)
+        private BigInteger CalculateFactorial(int n)
         {
-            if (n == 0)
+            if (n < 0)
+            {
+                MessageBox.Show("Ошибка", "Факториала отрицательных чисел не существует", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1; 
+            }
+            else if (n == 0)
             {
                 return 1;
             }
             else
             {
-                BigInteger результат = 1;
+                BigInteger result = 1;
                 for (int i = 1; i <= n; i++)
                 {
-                    результат *= i;
+                    result *= i;
                 }
-                return результат;
+                return result;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.Text))
+            int n = int.Parse(textBox1.Text);
+
+            BigInteger ответ = CalculateFactorial(n);
+
+            if (ответ != -1) 
             {
-                int число = Convert.ToInt32(textBox1.Text);
-                if (число >= 0)
-                {
-                    BigInteger результат = калькулятор(число);
-                    label2.Text = $"факториал числа {число} равен {результат}";
-                }
-            }
-            else
-            {
-                MessageBox.Show("введите число для вычисления факториала.");
+                textBox2.Text = n.ToString() + ответ.ToString();
             }
         }
     }
 }
+
